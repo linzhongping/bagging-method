@@ -51,6 +51,8 @@ class Bagging(object):
     def majority_voting(self, init_results):
 
         pred_result = []
+        init_results = np.array(init_results)
+
         for j in range(len(init_results[0])):
             pos = 0
             neg = 0
@@ -68,18 +70,22 @@ class Bagging(object):
 
     def plurality_voting(self, init_results):
         pred_result = []
-        for j in range(len(init_results[0])):
-            pos = 0
-            neg = 0
-            for i in range(self.n_classifier):
-                if init_results[i][j] == 1:  # 预测为正
-                    pos += 1
-                else:
-                    neg += 1
-            if pos >= neg:
-                pred_result.append(1)
-            else:
-                pred_result.append(0)
+        arr = np.array(init_results)
+        for j in range(arr.shape[1]):
+            a = np.array(arr[:,j])
+            b = np.bincount(a)
+            pred_result.append(np.argmax(b))
+            # pos = 0
+            # neg = 0
+            # for i in range(self.n_classifier):
+            #     if init_results[i][j] == 1:  # 预测为正
+            #         pos += 1
+            #     else:
+            #         neg += 1
+            # if pos >= neg:
+            #     pred_result.append(1)
+            # else:
+            #     pred_result.append(0)
         return pred_result
 
     def weighted_voting(self, weight_vector, init_results):
