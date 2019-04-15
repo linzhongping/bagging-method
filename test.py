@@ -20,7 +20,7 @@ X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.362, random_sta
 # print(X_train,X_test,y_train,y_test)
 # print(len(X_test))
 # 初始化bagging
-bagging = Bagging(n_classifier= NUM_CLASSIFIER, classifier= 'NB')
+bagging = Bagging(n_classifier= NUM_CLASSIFIER, classifier= 'DT')
 results = []
 average_acc = []
 
