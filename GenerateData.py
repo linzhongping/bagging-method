@@ -76,7 +76,7 @@ class Load_Dataset(object):
 
         X = np.array(X)
         y = np.array(y)
-        print(X,y)
+        # print(X,y)
         return X,y
     def load_UCI_dataset(self, path):
         '''
@@ -84,3 +84,17 @@ class Load_Dataset(object):
         :param path:
         :return:
         '''
+        X = []
+        y = []
+        with open(path, 'r') as f:
+            lines = f.readlines()
+            for l in lines:
+                l = l.strip()
+                l = l.split(',')
+                X.append([float(i) for i in l[:-1]])
+                y.append(int(l[-1]))
+
+        X = np.array(X)
+        y = np.array(y)
+        # print(X,y)
+        return X, y
