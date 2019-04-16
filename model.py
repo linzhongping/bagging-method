@@ -33,19 +33,19 @@ class Bagging(object):
         if not predictor:
             return 'parameter error'
         predictor.fit(train_X,train_y)
-
         preds = predictor.predict(test_X)
         return preds
-
-
 
     def integer_results(self, method = 'plurality_voting', init_results = None, weight_vector = None):
         if method == 'plurality_voting':
             return self.plurality_voting(init_results)
 
-
-
     def plurality_voting(self, init_results):
+        '''
+        相对多数投票法
+        :param init_results:
+        :return:
+        '''
         pred_result = []
         arr = np.array(init_results)
         for j in range(arr.shape[1]):
@@ -53,8 +53,6 @@ class Bagging(object):
             b = np.bincount(a)
             pred_result.append(np.argmax(b))
         return pred_result
-
-
 
     def compute_accuracy(self,pred_y, test_y):
         return accuracy_score(test_y, pred_y)
